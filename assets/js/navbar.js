@@ -8,60 +8,148 @@
         return;
     }
 
-    const base = document.body.dataset.base || "";
+    const base = document.body.dataset.base || "./";
 
-    fetch(`${base}components/navbar.html`)
-        .then((response) => {
+    function normalizePath(path) {
+        const clean = path.replace(/\/+/g, "/");
+
+        if (clean.endsWith("/")) {
+            return `${clean}index.html`;
+        }
+
+        return clean;
+    }
+
+    function getCurrentPage() {
+        const path = normalizePath(location.pathname);
+
+        if (path.endsWith("/about.html")) return "about";
+        if (path.endsWith("/history.html")) return "history";
+        if (path.endsWith("/lab.html")) return "lab";
+        if (path.endsWith("/information.html")) return "information";
+
+        return "home";
+    }
+
+    function setupNavigation() {
+        const nav = mount.querySelector("#mainNav");
+        const toggle = mount.querySelector("#menuToggle");
+        const header = mount.querySelector("#ieumHeader");
+        const currentPage = getCurrentPage();
+
+        nav.querySelectorAll("[data-page]").forEach((link) => {
+            const active = link.dataset.page === currentPage;
+
+            link.classList.toggle("active", active);
+
+            if (active) {
+                link.setAttribute("aria-current", "page");
+            } else {
+                link.removeAttribute("aria-current");
+            }
+        });
+
+        function closeMenu() {
+            nav.classList.remove("open");
+            toggle.classList.remove("open");
+            toggle.setAttribute("aria-expanded", "false");
+            toggle.setAttribute("aria-label", "메뉴 열기");
+        }
+
+        toggle.addEventListener("click", () => {
+            const opening = !nav.classList.contains("open");
+
+            nav.classList.toggle("open", opening);
+            toggle.classList.toggle("open", opening);
+
+            toggle.setAttribute("aria-expanded", String(opening));
+            toggle.setAttribute(
+                "aria-label",
+                opening ? "메뉴 닫기" : "메뉴 열기"
+            );
+        });
+
+        nav.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", closeMenu);
+        });
+
+        document.addEventListener("click", (event) => {
+            if (!header.contains(event.target)) {
+                closeMenu();
+            }
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                closeMenu();
+            }
+        });
+
+        let ticking = false;
+
+        function updateScrollState() {
+            if (ticking) return;
+
+            ticking = true;
+
+            requestAnimationFrame(() => {
+                header.classList.toggle("scrolled", window.scrollY > 12);
+                ticking = false;
+            });
+        }
+
+        window.addEventListener("scroll", updateScrollState, {
+            passive: true
+        });
+
+        updateScrollState();
+    }
+
+    async function loadNavbar() {
+        try {
+            const response = await fetch(`${base}components/navbar.html`);
+
             if (!response.ok) {
-                throw new Error(`Navbar load failed: ${response.status}`);
+                throw new Error(`HTTP ${response.status}`);
             }
 
-            return response.text();
-        })
-        .then((html) => {
-            mount.innerHTML = html;
+            mount.innerHTML = await response.text();
 
-            const currentPath = location.pathname;
-            const links = mount.querySelectorAll("[data-page]");
+            const links = mount.querySelectorAll(".nav-link");
 
             links.forEach((link) => {
-                const href = new URL(link.href, location.href).pathname;
-                const isHome =
-                    link.dataset.page === "home" &&
-                    currentPath.endsWith("/index.html");
+                const destination = link.getAttribute("href");
 
-                if (href === currentPath || isHome) {
-                    link.classList.add("active");
-                    link.setAttribute("aria-current", "page");
+                if (destination) {
+                    link.href = `${base}${destination}`;
                 }
             });
 
-            const menuButton = mount.querySelector("#menuToggle");
-            const nav = mount.querySelector("#mainNav");
+            const brandLink = mount.querySelector(".brand");
+            const homeLink = mount.querySelector('[data-page="home"]');
+            const ctaLink = mount.querySelector(".header-cta");
 
-            menuButton?.addEventListener("click", () => {
-                const isOpen = nav.classList.toggle("open");
+            if (brandLink) brandLink.href = `${base}index.html`;
+            if (homeLink) homeLink.href = `${base}index.html`;
+            if (ctaLink) ctaLink.href = `${base}pages/lab.html`;
 
-                menuButton.setAttribute(
-                    "aria-expanded",
-                    String(isOpen)
-                );
+            setupNavigation();
+        } catch (error) {
+            console.error("IEUM 상단바 로딩 실패:", error);
 
-                menuButton.setAttribute(
-                    "aria-label",
-                    isOpen ? "메뉴 닫기" : "메뉴 열기"
-                );
-            });
+            mount.innerHTML = `
+                <div class="navbar-error">
+                    메뉴를 불러오지 못했어.
+                    <button type="button" id="navbarRetry">다시 시도</button>
+                </div>
+            `;
 
-            nav?.querySelectorAll("a").forEach((link) => {
-                link.addEventListener("click", () => {
-                    nav.classList.remove("open");
-                    menuButton?.setAttribute("aria-expanded", "false");
-                });
-            });
-        })
-        .catch((error) => {
-            console.error("IEUM navbar:", error);
-            mount.textContent = "메뉴를 불러오지 못했어. 페이지를 새로고침해 봐.";
-        });
+            mount.querySelector("#navbarRetry")?.addEventListener(
+                "click",
+                loadNavbar
+            );
+        }
+    }
+
+    loadNavbar();
 })();
