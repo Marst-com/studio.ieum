@@ -1,34 +1,60 @@
 
-<header class="site-header">
+<header class="site-header" id="ieumHeader">
     <div class="container header-inner">
-        <a class="brand" href="/IEUM-Playground/index.html">
-            <span class="brand-mark">I</span>
-            <span class="brand-name">IEUM<span> Playground</span></span>
-        </a>
 
-        <button
-            class="menu-toggle"
-            id="menuToggle"
-            type="button"
-            aria-label="메뉴 열기"
-            aria-expanded="false"
-            aria-controls="mainNav"
-        >
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
+        <a class="brand" href="index.html" aria-label="IEUM Playground 홈">
+            <span class="brand-mark">I</span>
+            <span class="brand-name">
+                IEUM<span> Playground</span>
+            </span>
+        </a>
 
         <nav class="main-nav" id="mainNav" aria-label="주 메뉴">
-            <a class="nav-link" href="/IEUM-Playground/index.html" data-page="home">홈</a>
-            <a class="nav-link" href="/IEUM-Playground/pages/about.html" data-page="about">소개</a>
-            <a class="nav-link" href="/IEUM-Playground/pages/history.html" data-page="history">역사</a>
-            <a class="nav-link" href="/IEUM-Playground/pages/lab.html" data-page="lab">Lab</a>
-            <a class="nav-link" href="/IEUM-Playground/pages/information.html" data-page="information">정보</a>
+            <a class="nav-link" href="index.html" data-page="home">
+                <span class="nav-icon">⌂</span>
+                홈
+            </a>
+
+            <a class="nav-link" href="pages/about.html" data-page="about">
+                <span class="nav-icon">◈</span>
+                소개
+            </a>
+
+            <a class="nav-link" href="pages/history.html" data-page="history">
+                <span class="nav-icon">◷</span>
+                역사
+            </a>
+
+            <a class="nav-link" href="pages/lab.html" data-page="lab">
+                <span class="nav-icon">⌘</span>
+                Lab
+            </a>
+
+            <a class="nav-link" href="pages/information.html" data-page="information">
+                <span class="nav-icon">ⓘ</span>
+                정보
+            </a>
         </nav>
 
-        <a class="button button-primary header-cta" href="/IEUM-Playground/pages/lab.html">
-            실험 시작하기 <span aria-hidden="true">→</span>
-        </a>
+        <div class="header-actions">
+            <a class="button button-primary header-cta" href="pages/lab.html">
+                <span>실험 시작하기</span>
+                <span aria-hidden="true">↗</span>
+            </a>
+
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+                type="button"
+                aria-label="메뉴 열기"
+                aria-expanded="false"
+                aria-controls="mainNav"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
     </div>
 </header>
