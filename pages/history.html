@@ -1,0 +1,529 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b0b16">
+    <meta name="description" content="IEUM Playground의 프로젝트 발전 과정과 주요 기록을 살펴봐.">
+    <title>IEUM 역사 | IEUM Playground</title>
+
+    <link rel="icon" href="../assets/images/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../assets/css/global.css">
+
+    <script src="../assets/js/global.js" defer></script>
+    <script src="../assets/js/history.js" defer></script>
+</head>
+
+<body>
+    <div class="ambient ambient-one" aria-hidden="true"></div>
+    <div class="ambient ambient-two" aria-hidden="true"></div>
+
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="../index.html" aria-label="IEUM Playground 홈">
+                <span class="brand-mark">I</span>
+                <span class="brand-name">IEUM<span> Playground</span></span>
+            </a>
+
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+                type="button"
+                aria-label="메뉴 열기"
+                aria-expanded="false"
+                aria-controls="mainNav"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav class="main-nav" id="mainNav" aria-label="주 메뉴">
+                <a class="nav-link" href="../index.html">홈</a>
+                <a class="nav-link" href="about.html">소개</a>
+                <a class="nav-link" href="history.html" aria-current="page">역사</a>
+                <a class="nav-link" href="lab.html">Lab</a>
+                <a class="nav-link" href="information.html">정보</a>
+            </nav>
+
+            <a class="button button-primary header-cta" href="lab.html">
+                실험 시작하기
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-hero container">
+            <div class="page-hero-meta">
+                <span class="eyebrow">IEUM ARCHIVE</span>
+                <span class="status-dot"></span>
+                <span>아이디어가 발전하는 과정</span>
+            </div>
+
+            <h1>
+                연결의 기록,<br>
+                <span class="gradient-text">IEUM History.</span>
+            </h1>
+
+            <p class="page-description">
+                프로젝트는 한 번에 완성되지 않아.
+                아이디어를 구상하고, 직접 만들어 보고,
+                문제를 발견하고, 다시 개선하는 과정을 기록하는 공간이야.
+            </p>
+
+            <div class="hero-actions">
+                <a class="button button-primary" href="#timeline">
+                    기록 둘러보기 <span aria-hidden="true">↓</span>
+                </a>
+                <a class="button button-ghost" href="about.html">
+                    IEUM 소개
+                </a>
+            </div>
+        </section>
+
+        <section class="section-block container">
+            <div class="history-overview">
+                <article class="history-stat">
+                    <span class="history-stat-icon">📚</span>
+                    <strong id="historyTotal">8</strong>
+                    <span>등록된 기록</span>
+                </article>
+
+                <article class="history-stat">
+                    <span class="history-stat-icon">🧩</span>
+                    <strong>06</strong>
+                    <span>탐구 영역</span>
+                </article>
+
+                <article class="history-stat">
+                    <span class="history-stat-icon">♻️</span>
+                    <strong>∞</strong>
+                    <span>계속되는 개선</span>
+                </article>
+            </div>
+
+            <div class="section-heading" id="timeline">
+                <div>
+                    <span class="eyebrow">TIMELINE</span>
+                    <h2>발전 과정 타임라인</h2>
+                </div>
+
+                <p>
+                    검색하거나 분류를 선택해서 원하는 기록을 찾아봐.
+                </p>
+            </div>
+
+            <div class="history-toolbar">
+                <label class="history-search">
+                    <span aria-hidden="true">⌕</span>
+                    <input
+                        id="historySearch"
+                        type="search"
+                        placeholder="기록, 키워드 검색..."
+                        autocomplete="off"
+                        aria-label="역사 기록 검색"
+                    >
+                    <kbd>/</kbd>
+                </label>
+
+                <label class="history-sort-label">
+                    <span>정렬</span>
+                    <select id="historySort" class="select-input">
+                        <option value="newest">최근 순</option>
+                        <option value="oldest">오래된 순</option>
+                        <option value="title">이름 순</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="history-filters" id="historyFilters" aria-label="기록 분류">
+                <button class="history-filter active" type="button" data-category="all">
+                    전체 기록
+                </button>
+                <button class="history-filter" type="button" data-category="planning">
+                    기획
+                </button>
+                <button class="history-filter" type="button" data-category="development">
+                    개발
+                </button>
+                <button class="history-filter" type="button" data-category="ai">
+                    인공지능
+                </button>
+                <button class="history-filter" type="button" data-category="design">
+                    디자인
+                </button>
+                <button class="history-filter" type="button" data-category="security">
+                    보안
+                </button>
+            </div>
+
+            <div class="history-result-line">
+                <span id="historyResultCount">8개의 기록</span>
+                <button class="text-button" id="resetHistoryFilters" type="button">
+                    필터 초기화
+                </button>
+            </div>
+
+            <div class="timeline" id="historyTimeline">
+                <article
+                    class="timeline-item"
+                    data-category="planning"
+                    data-date="2026-01-10"
+                    data-keywords="아이디어 기획 시작 프로젝트"
+                >
+                    <span class="timeline-marker"></span>
+                    <div class="timeline-content">
+                        <div class="timeline-meta">
+                            <time datetime="2026-01-10">2026.01.10</time>
+                            <span class="tag">기획</span>
+                        </div>
+
+                        <h3>아이디어를 프로젝트로 구체화하기</h3>
+
+                        <p>
+                            떠오른 아이디어를 실제로 만들 수 있는 프로젝트로
+                            발전시키기 위해 목표와 필요한 기능을 정리하는 단계.
+                        </p>
+
+                        <button class="timeline-toggle" type="button" aria-expanded="false">
+                            상세 내용 보기 <span aria-hidden="true">＋</span>
+                        </button>
+
+                        <div class="timeline-detail" hidden>
+                            <p>
+                                이 단계에서는 어떤 문제를 해결할지,
+                                누가 사용할지, 핵심 기능은 무엇인지 구분해.
+                            </p>
+                            <ul>
+                                <li>프로젝트의 목적 정의</li>
+                                <li>필수 기능과 선택 기능 구분</li>
+                                <li>실현 가능성과 필요한 도구 검토</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+                <article
+                    class="timeline-item"
+                    data-category="development"
+                    data-date="2026-02-05"
+                    data-keywords="웹사이트 HTML CSS JavaScript 프런트엔드"
+                >
+                    <span class="timeline-marker"></span>
+                    <div class="timeline-content">
+                        <div class="timeline-meta">
+                            <time datetime="2026-02-05">2026.02.05</time>
+                            <span class="tag">개발</span>
+                        </div>
+
+                        <h3>웹 기술로 첫 화면 만들기</h3>
+
+                        <p>
+                            HTML로 구조를 만들고 CSS로 디자인을 적용한 뒤,
+                            JavaScript로 사용자 상호작용을 구현하는 과정.
+                        </p>
+
+                        <button class="timeline-toggle" type="button" aria-expanded="false">
+                            상세 내용 보기 <span aria-hidden="true">＋</span>
+                        </button>
+
+                        <div class="timeline-detail" hidden>
+                            <p>
+                                화면을 구성하는 것과 기능을 구현하는 것을 분리하면
+                                수정과 확장이 쉬워져.
+                            </p>
+                            <ul>
+                                <li>HTML 문서 구조 작성</li>
+                                <li>CSS 반응형 레이아웃 적용</li>
+                                <li>JavaScript 이벤트 처리</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+                <article
+                    class="timeline-item"
+                    data-category="design"
+                    data-date="2026-03-01"
+                    data-keywords="UI UX 디자인 색상 보라색 하늘색 브랜딩"
+                >
+                    <span class="timeline-marker"></span>
+                    <div class="timeline-content">
+                        <div class="timeline-meta">
+                            <time datetime="2026-03-01">2026.03.01</time>
+                            <span class="tag">디자인</span>
+                        </div>
+
+                        <h3>브랜드의 시각적 방향 설정</h3>
+
+                        <p>
+                            보라색과 하늘색을 중심으로 기술적인 느낌과
+                            깔끔한 사용자 경험을 결합하는 디자인 방향을 탐구해.
+                        </p>
+
+                        <button class="timeline-toggle" type="button" aria-expanded="false">
+                            상세 내용 보기 <span aria-hidden="true">＋</span>
+                        </button>
+
+                        <div class="timeline-detail" hidden>
+                            <p>
+                                디자인은 장식뿐 아니라 정보의 우선순위와
+                                사용자가 기능을 이해하는 방식에도 영향을 줘.
+                            </p>
+                            <ul>
+                                <li>색상과 글꼴 체계 정리</li>
+                                <li>버튼과 카드의 공통 스타일 설계</li>
+                                <li>모바일 화면에서의 사용성 검토</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+                <article
+                    class="timeline-item"
+                    data-category="development"
+                    data-date="2026-04-12"
+                    data-keywords="백엔드 API 서버 프런트엔드 연결"
+                >
+                    <span class="timeline-marker"></span>
+                    <div class="timeline-content">
+                        <div class="timeline-meta">
+                            <time datetime="2026-04-12">2026.04.12</time>
+                            <span class="tag">개발</span>
+                        </div>
+
+                        <h3>프런트엔드와 백엔드 연결 이해하기</h3>
+
+                        <p>
+                            화면에서 입력한 데이터를 서버에 전달하고,
+                            서버의 응답을 화면에 표시하는 구조를 살펴봐.
+                        </p>
+
+                        <button class="timeline-toggle" type="button" aria-expanded="false">
+                            상세 내용 보기 <span aria-hidden="true">＋</span>
+                        </button>
+
+                        <div class="timeline-detail" hidden>
+                            <p>
+                                브라우저와 서버의 역할을 나누면 API와 인증,
+                                데이터 저장 같은 기능을 더 체계적으로 설계할 수 있어.
+                            </p>
+                            <ul>
+                                <li>HTTP 요청과 응답 이해</li>
+                                <li>API 경로와 데이터 형식 설계</li>
+                                <li>오류 응답과 연결 실패 처리</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+                <article
+                    class="timeline-item"
+                    data-category="ai"
+                    data-date="2026-05-20"
+                    data-keywords="AI 인공지능 머신러닝 데이터 모델 실험"
+                >
+                    <span class="timeline-marker"></span>
+                    <div class="timeline-content">
+                        <div class="timeline-meta">
+                            <time datetime="2026-05-20">2026.05.20</time>
+                            <span class="tag">인공지능</span>
+                        </div>
+
+                        <h3>인공지능 실험 영역 확장</h3>
+
+                        <p>
+                            데이터를 활용하는 모델과 규칙 기반 프로그램의 차이를
+                            이해하고, 실제 결과를 비교하는 방향을 탐구해.
+                        </p>
+
+                        <button class="timeline-toggle" type="button" aria-expanded="false">
+                            상세 내용 보기 <span aria-hidden="true">＋</span>
+                        </button>
+
+                        <div class="timeline-detail" hidden>
+                            <p>
+                                모델이 그럴듯한 결과를 출력하는 것만으로는 충분하지 않아.
+                                학습 데이터, 검증 데이터, 평가 방법을 함께 살펴봐야 해.
+                            </p>
+                            <ul>
+                                <li>데이터 수집과 정리</li>
+                                <li>학습과 검증의 차이 이해</li>
+                                <li>기준 모델과 결과 비교</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+                <article
+                    class="timeline-item"
+                    data-category="security"
+                    data-date="2026-06-15"
+                    data-keywords="보안 API 키 환경변수 개인정보 인증"
+                >
+                    <span class="timeline-marker"></span>
+                    <div class="timeline-content">
+                        <div class="timeline-meta">
+                            <time datetime="2026-06-15">2026.06.15</time>
+                            <span class="tag">보안</span>
+                        </div>
+
+                        <h3>안전한 서비스 구조 고민하기</h3>
+
+                        <p>
+                            공개된 웹페이지에 비밀 키를 넣지 않고,
+                            서버에서 중요한 작업을 처리하는 구조를 살펴봐.
+                        </p>
+
+                        <button class="timeline-toggle" type="button" aria-expanded="false">
+                            상세 내용 보기 <span aria-hidden="true">＋</span>
+                        </button>
+
+                        <div class="timeline-detail" hidden>
+                            <p>
+                                프런트엔드 코드는 사용자에게 전달되므로
+                                비밀 정보를 숨기는 장소로 사용할 수 없어.
+                            </p>
+                            <ul>
+                                <li>서버 환경변수로 비밀 키 관리</li>
+                                <li>인증과 권한 확인</li>
+                                <li>입력값 검증과 오류 처리</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+                <article
+                    class="timeline-item"
+                    data-category="planning"
+                    data-date="2026-08-02"
+                    data-keywords="프로젝트 통합 IEUM 재사용 모듈 설계"
+                >
+                    <span class="timeline-marker"></span>
+                    <div class="timeline-content">
+                        <div class="timeline-meta">
+                            <time datetime="2026-08-02">2026.08.02</time>
+                            <span class="tag">기획</span>
+                        </div>
+
+                        <h3>여러 프로젝트가 공유할 구조 구상</h3>
+
+                        <p>
+                            공통 기능을 모듈로 분리하고,
+                            프로젝트 사이에서 재사용할 수 있는 구조를 생각해.
+                        </p>
+
+                        <button class="timeline-toggle" type="button" aria-expanded="false">
+                            상세 내용 보기 <span aria-hidden="true">＋</span>
+                        </button>
+
+                        <div class="timeline-detail" hidden>
+                            <p>
+                                공통 코드를 분리하면 같은 기능을 여러 번 구현할 필요가 줄어.
+                                대신 모듈 사이의 의존성과 버전 관리도 고려해야 해.
+                            </p>
+                            <ul>
+                                <li>공통 기능과 개별 기능 분리</li>
+                                <li>명확한 입력과 출력 정의</li>
+                                <li>호환성과 테스트 기준 설정</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+                <article
+                    class="timeline-item"
+                    data-category="development"
+                    data-date="2026-10-12"
+                    data-keywords="IEUM Playground 인터랙티브 실험실 통합"
+                >
+                    <span class="timeline-marker"></span>
+                    <div class="timeline-content">
+                        <div class="timeline-meta">
+                            <time datetime="2026-10-12">2026.10.12</time>
+                            <span class="tag">개발</span>
+                        </div>
+
+                        <h3>IEUM Playground 구성</h3>
+
+                        <p>
+                            소개, 역사, 실험실, 정보 페이지를 연결하고
+                            여러 기능을 직접 체험할 수 있는 공간을 구성해.
+                        </p>
+
+                        <button class="timeline-toggle" type="button" aria-expanded="false">
+                            상세 내용 보기 <span aria-hidden="true">＋</span>
+                        </button>
+
+                        <div class="timeline-detail" hidden>
+                            <p>
+                                공통 디자인과 페이지별 기능을 분리하고,
+                                검색과 실험 기록 같은 상호작용을 단계적으로 연결해.
+                            </p>
+                            <ul>
+                                <li>공통 CSS와 JavaScript 구성</li>
+                                <li>다섯 개 페이지의 연결</li>
+                                <li>모바일 반응형과 접근성 점검</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="history-empty" id="historyEmpty" hidden>
+                <span aria-hidden="true">🔎</span>
+                <h3>검색 결과가 없어.</h3>
+                <p>다른 키워드를 입력하거나 필터를 초기화해 봐.</p>
+                <button class="button button-ghost" id="emptyResetButton" type="button">
+                    전체 기록 보기
+                </button>
+            </div>
+
+            <p class="history-disclaimer">
+                참고: 위 날짜와 항목은 사이트 구조를 보여 주기 위한 예시 기록이야.
+                실제 프로젝트의 공식 연혁이나 실제 완료 일자를 의미하지 않아.
+            </p>
+        </section>
+
+        <section class="section-block container">
+            <div class="bottom-cta">
+                <div class="cta-glow" aria-hidden="true"></div>
+                <span class="eyebrow">THE STORY CONTINUES</span>
+                <h2>다음 기록은<br><span class="gradient-text">네가 만들어 가는 거야.</span></h2>
+                <p>
+                    새로운 기능을 실험하고, 결과를 확인하고,
+                    더 나은 방법을 찾아봐.
+                </p>
+                <a class="button button-primary" href="lab.html">
+                    Lab에서 실험하기 <span aria-hidden="true">→</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <a class="brand" href="../index.html">
+                <span class="brand-mark">I</span>
+                <span class="brand-name">IEUM<span> Playground</span></span>
+            </a>
+
+            <p>상상을 연결하고, 직접 만들어 봐.</p>
+
+            <div class="footer-links">
+                <a href="about.html">소개</a>
+                <a href="history.html">역사</a>
+                <a href="lab.html">Lab</a>
+                <a href="information.html">정보</a>
+            </div>
+
+            <span class="footer-copyright">
+                © <span id="year"></span> IEUM Playground
+            </span>
+        </div>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
